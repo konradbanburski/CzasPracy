@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/userHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+
+            <center>
+                <h:form id="userForm">
+                    <h1>Dodaj czynność</h1>
+                <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5" columnClasses="label, value">
+                    <p:outputLabel for="@next" value="Wybierz czynność:" />
+                    <p:selectOneMenu id="job" value="#{userFormController.job}" panelStyle="width:max-content;" style="width:200px" filter="true" filterMatchMode="contains" required="true" requiredMessage="Pola nie mogą być puste!">
+                        <f:selectItems  value="#{userFormController.jobs}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="@next" value="Wybierz klienta:" />
+                    <p:selectOneMenu id="client" value="#{userFormController.client}" panelStyle="width:max-content;" style="width:200px" filter="true" filterMatchMode="contains" required="true" requiredMessage="Pola nie mogą być puste!">
+                        <f:selectItems  value="#{userFormController.clients}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="date" value="Data:" />
+                    <p:datePicker id="date" label="date" value="#{userFormController.date}" pattern="dd-MM-yyyy" inputStyle="font-weight:normal;" required="true" requiredMessage="Pola nie mogą być puste!"/>
+
+                    <p:outputLabel for="time" value="Czas:" />
+                    <p:datePicker id="time" value="#{userFormController.time}" timeOnly="true"  pattern="HH:mm" inputStyle="font-weight:normal;" panelStyle="position:absolute; top: 0px; width:220px;" required="true" requiredMessage="Pola nie mogą być puste!"/>
+                </h:panelGrid>
+                    <p:commandButton value="Dodaj" action="#{userFormController.addJobToHistory()}" icon="pi pi-check" />
+                </h:form>
+
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

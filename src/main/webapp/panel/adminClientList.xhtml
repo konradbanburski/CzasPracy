@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+            <center>
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+                <h:form id="adminClientList">
+                    <p:dataTable id="tbl" var="client" value="#{adminClientListController.clients}"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginator="true" rows="20" style="margin-bottom:20px">
+                        <f:facet name="{Exporters}">
+                            <div style="float:right;padding-top: 5px;">
+                                <h:commandLink>
+                                    <p:graphicImage name="/images/csv.png" width="24"/>
+                                    <p:dataExporter type="csv" target="tbl" fileName="Dane" pageOnly="true" encoding="UTF-8"/>
+                                </h:commandLink>
+                            </div>
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID" />
+                            </f:facet>
+                            <h:outputText value="#{client.id}" />
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nazwa"/>
+                            </f:facet>
+                            <h:outputText value="#{client.name}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Skrócona nazwa" />
+                            </f:facet>
+                            <h:outputText value="#{client.shortName}" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton action="#{adminClientEditFormController.gotoAdminClientEditFormWithParameters(client)}" icon="pi pi-user" value="Edytuj" style="width:100%;"/>
+                            <p:button outcome="/panel/adminClientHistory.xhtml" icon="pi pi-list" value="Historia Klienta" style="width:100%;">
+                                <f:param name="id" value="#{client.id}" />
+                                <f:param name="name" value="#{client.name}" />
+                                <f:param name="shortName" value="#{client.shortName}" />
+                            </p:button>
+                        </p:column>
+                    </p:dataTable>
+                    <h3>Pobierz liste klientów:</h3>
+                    <h:commandLink>
+                        <p:graphicImage name="/images/csv.png" />
+                        <p:dataExporter type="csv" target="tbl" fileName="Dane"  encoding="UTF-8"/>
+                    </h:commandLink>
+                </h:form>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

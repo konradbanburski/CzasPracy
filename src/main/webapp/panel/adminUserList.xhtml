@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+            <center>
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+                <h:form id="adminUserList">
+                    <p:dataTable id="tbl" var="account" value="#{adminUserListController.accounts}"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                 paginator="true" rows="20" style="margin-bottom:20px">
+                        <f:facet name="{Exporters}">
+                            <div style="float:right;padding-top: 5px;">
+                                <h:commandLink>
+                                    <p:graphicImage name="/images/csv.png" width="24"/>
+                                    <p:dataExporter type="csv" target="tbl" fileName="Dane" pageOnly="true" encoding="UTF-8"/>
+                                </h:commandLink>
+                            </div>
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID" />
+                            </f:facet>
+                            <h:outputText value="#{account.id}" />
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Login"/>
+                            </f:facet>
+                            <h:outputText value="#{account.login}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Imię" />
+                            </f:facet>
+                            <h:outputText value="#{account.name}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nazwisko" />
+                            </f:facet>
+                            <h:outputText value="#{account.surname}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dział" />
+                            </f:facet>
+                            <h:outputText value="#{account.department}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Administrator" />
+                            </f:facet>
+                            <h:outputText value="#{account.accountTypeName}" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton action="#{adminUserEditFormController.gotoAdminUserEditFormWithParameters(account)}" icon="pi pi-user" value="Edytuj" style="width:100%;"/>
+                            <p:button outcome="/panel/adminUserHistory.xhtml" icon="pi pi-list" value="Historia Pracy" style="width:100%;">
+                                <f:param name="id" value="#{account.id}" />
+                                <f:param name="login" value="#{account.login}" />
+                                <f:param name="name" value="#{account.name}" />
+                                <f:param name="surname" value="#{account.surname}" />
+                            </p:button>
+                        </p:column>
+                    </p:dataTable>
+                    <h3>Pobierz liste użytkowników:</h3>
+                    <h:commandLink>
+                        <p:graphicImage name="/images/csv.png" />
+                        <p:dataExporter type="csv" target="tbl" fileName="Dane"  encoding="UTF-8"/>
+                    </h:commandLink>
+                </h:form>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

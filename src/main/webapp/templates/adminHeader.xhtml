@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <h:outputStylesheet name="style.css"/>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+
+    </h:head>
+
+    <h:body>
+
+        <p:panel header="Panel Administratora">
+            <f:event type="preRenderView" listener="#{user.checkUserSession()}" />
+            <h:form id="menu">
+                <p:commandButton update="@form" id="dynaButton" ajax="false" value="Menu" type="button" icon="pi pi-home" />
+                <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                    <p:submenu label="Użytkownicy">
+                        <p:menuitem value="Dodaj użytkownika" ajax="false" action="#{user.gotoAdminUserForm()}" icon="pi pi-plus"/>
+                        <p:menuitem value="Lista użytkowników" ajax="false" action="#{user.gotoAdminUserList()}"  icon="pi pi-list"/>
+                    </p:submenu>
+                    <p:submenu label="Klienci">
+                        <p:menuitem value="Dodaj klienta" ajax="false" action="#{user.gotoAdminClientForm()}" icon="pi pi-plus"/>
+                        <p:menuitem value="Lista klientów" ajax="false" action="#{user.gotoAdminClientList()}"  icon="pi pi-list"/>
+                    </p:submenu>
+                    <p:submenu label="Czynności">
+                        <p:menuitem value="Dodaj czynność" ajax="false" action="#{user.gotoAdminJobForm()}" icon="pi pi-plus"/>
+                        <p:menuitem value="Lista czynności" ajax="false" action="#{user.gotoAdminJobList()}"  icon="pi pi-list"/>
+                    </p:submenu>
+                    <p:menuitem value="Wyloguj" ajax="false" action="#{user.logout()}" icon="pi pi-sign-out"/>
+                </p:menu>
+                <h:outputText id="userSessionInfo" value ="#{user.showUserSession()}" style="float: right;"/>
+            </h:form>
+            <ui:insert name="general_content"/>
+        </p:panel>
+    </h:body>
+</ui:composition>

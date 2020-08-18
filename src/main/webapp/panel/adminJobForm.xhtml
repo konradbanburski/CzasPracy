@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+
+            <center>
+                <h:form id="adminJobForm">
+                    <h1>Dodaj czynność</h1>
+                    <h:panelGrid columns="2" cellpadding="4">
+                        <h:outputText value="Nazwa " />
+                        <p:inputText value="#{adminJobFormController.name}"  required="true" requiredMessage="Pola nie mogą być puste!"/>
+                    </h:panelGrid>
+                    <p:commandButton update="@form" value="Dodaj" validateClient="true" action="#{adminJobFormController.addJob()}"/>
+                </h:form>
+
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

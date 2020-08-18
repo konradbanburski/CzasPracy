@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+            <center>
+                <h:form id="userEditForm">
+
+                    <h1>Edytuj użytkownika</h1>
+                    <h:panelGrid columns="2" cellpadding="4">
+                        <h:outputText for="idInput" value=""/>
+                        <p:inputText id="idInput" value="#{adminUserEditFormController.id}" type="hidden" requier="true" label="1" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Login: " />
+                        <p:inputText value="#{adminUserEditFormController.login}" required="true" label="2" requiredMessage="Pola nie mogą być puste!"  />
+                        <h:outputText value="Hasło " />
+                        <p:password value="#{adminUserEditFormController.password}"  required="true" label="3" redisplay="true" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Imię " />
+                        <p:inputText value="#{adminUserEditFormController.name}"  required="true" label="4" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Nazwisko " />
+                        <p:inputText value="#{adminUserEditFormController.surname}"  required="true" label="5" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Dział " />
+                        <p:inputText value="#{adminUserEditFormController.department}"  required="true" label="6" requiredMessage="Pola nie mogą być puste!"/>
+                        <p:outputLabel for="accountType" value="Typ konta " />
+                        <p:selectOneRadio id="accountType" value="#{adminUserEditFormController.accountType}" unselectable="no">
+                            <f:selectItem itemLabel="Użytkownik" itemValue="0" />
+                            <f:selectItem itemLabel="Administrator" itemValue="1" />
+                        </p:selectOneRadio>
+                         </h:panelGrid>
+                    <p:commandButton update="userEditForm" value="Zapisz zmiany" ajax="false" action="#{adminUserEditFormController.saveUser()}"/>
+                    <p:commandButton update="userEditForm" value="Usuń użytkownika" ajax="false" action="#{adminUserEditFormController.deleteUser()}"/>
+                    <p:commandButton update="userEditForm" value="Lista użytkowników" ajax="false" action="#{user.gotoAdminUserList()}"/>
+                </h:form>
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

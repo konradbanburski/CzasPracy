@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+
+            <center>
+                <h:form id="adminUserForm">
+                    <h1>Dodaj użytkownika</h1>
+                    <h:panelGrid columns="2" cellpadding="4">
+                        <h:outputText value="Login: " />
+                        <p:inputText value="#{adminUserFormController.login}" required="true" label="Login" requiredMessage="Pola nie mogą być puste!"  />
+                        <h:outputText value="Hasło " />
+                        <p:password value="#{adminUserFormController.password}"  required="true" label="Password" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Imię " />
+                        <p:inputText value="#{adminUserFormController.name}"  required="true" label="Name" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Nazwisko " />
+                        <p:inputText value="#{adminUserFormController.surname}"  required="true" label="Surname" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Dział " />
+                        <p:inputText value="#{adminUserFormController.department}"  required="true" label="Department" requiredMessage="Pola nie mogą być puste!"/>
+                        <p:outputLabel for="accountType" value="Typ konta " />
+                        <p:selectOneRadio id="accountType" value="#{adminUserFormController.accountType}" unselectable="no">
+                            <f:selectItem itemLabel="Użytkownik" itemValue="0" />
+                            <f:selectItem itemLabel="Administrator" itemValue="1" />
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+                    <p:commandButton update="@form" value="Dodaj" validateClient="true" action="#{adminUserFormController.addUser()}"/>
+                </h:form>
+
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

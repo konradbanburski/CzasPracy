@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/adminHeader.xhtml">
+
+    <ui:define name="general_content">
+        <h:head>
+            <h:outputStylesheet name="style.css"/>
+        </h:head>
+        <h:body>
+            <center>
+                <h:form id="clientEditForm">
+
+                    <h1>Edytuj klienta</h1>
+                    <h:panelGrid columns="2" cellpadding="4">
+                        <h:outputText for="idInput" value=""/>
+                        <p:inputText id="idInput" value="#{adminClientEditFormController.id}" type="hidden" requier="true" label="1" requiredMessage="Pola nie mogą być puste!"/>
+                        <h:outputText value="Nazwa " />
+                        <p:inputText value="#{adminClientEditFormController.name}" required="true" label="2" requiredMessage="Pola nie mogą być puste!"  />
+                        <h:outputText value="Nazwa skrócona " />
+                        <p:inputText value="#{adminClientEditFormController.shortName}"  required="true" label="3" requiredMessage="Pola nie mogą być puste!"/>
+                    </h:panelGrid>
+                    <p:commandButton update="clientEditForm" value="Zapisz zmiany" ajax="false" action="#{adminClientEditFormController.saveClient()}"/>
+                    <p:commandButton update="clientEditForm" value="Usuń klienta" ajax="false" action="#{adminClientEditFormController.deleteClient()}"/>
+                    <p:commandButton update="clientEditForm" value="Lista klientów" ajax="false" action="#{user.gotoAdminClientList()}"/>
+                </h:form>
+                <p:messages id="insert" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </center>
+        </h:body>
+    </ui:define>
+
+</ui:composition>

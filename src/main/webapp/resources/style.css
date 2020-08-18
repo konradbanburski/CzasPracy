@@ -1,0 +1,21 @@
+//Header in panel ex. userPanel
+.ui-panel-title {
+     text-align: center;
+}
+
+//Menu button in header
+.ui-panel .ui-panel-content {
+    padding: .5em 0;
+}
+
+//List of elements in userPanel ex. jobs and clients
+.ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon {
+    position: absolute;
+    top: 13px;
+    right: 2px;
+}
+
+//Div info about user session
+#userSessionInfo {
+    float: right;
+}

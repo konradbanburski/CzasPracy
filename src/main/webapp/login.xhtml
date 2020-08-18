@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+    <title>Czas pracy</title>
+</h:head>
+
+<h:body>
+    <center>
+    <h:form>
+
+
+        <p:panel header="Panel Logowania">
+            <h:panelGrid columns="2" cellpadding="4">
+                <h:outputText value="Login:" />
+                <p:inputText id="login" value="#{loginController.inputLogin}" required="true" label="Login" requiredMessage="Pola nie mogą być puste!"/>
+
+                <h:outputText value="Hasło"/>
+                <p:password id="password" value="#{loginController.inputPassword}" required="true" label="Hasło" requiredMessage="Pola nie mogą być puste!"/>
+
+            </h:panelGrid>
+                <p:commandButton update="@form" value="Zaloguj" validateClient="true" action="#{loginController.authorize}" ajax="false"/>
+        </p:panel>
+    </h:form>
+
+    <h:form>
+        <p:panel header="Panel Rejestracji">
+
+            <h:panelGrid columns="2" cellpadding="4">
+                <h:outputText value="Login: " />
+                <p:inputText value="#{loginController.inputLogin}" required="true" label="Login" requiredMessage="Pola nie mogą być puste!"  />
+                <h:outputText value="Hasło " />
+                <p:password value="#{loginController.inputPassword}"  required="true" label="Password" requiredMessage="Pola nie mogą być puste!"/>
+                <h:outputText value="Imię " />
+                <p:inputText value="#{loginController.inputName}"  required="true" label="Name" requiredMessage="Pola nie mogą być puste!"/>
+                <h:outputText value="Nazwisko " />
+                <p:inputText value="#{loginController.inputSurname}"  required="true" label="Surname" requiredMessage="Pola nie mogą być puste!"/>
+            </h:panelGrid>
+            <p:commandButton update="@form" value="Zarejestruj" validateClient="true" action="#{loginController.register}"/>
+        </p:panel>
+
+        <p:messages id="registration" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+
+
+
+    </h:form>
+    </center>
+</h:body>
+</html>
