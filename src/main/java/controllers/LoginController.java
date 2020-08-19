@@ -82,7 +82,8 @@ public class LoginController {
                 return "panel/userForm.xhtml";
             }
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędny login lub hasło!", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                                                "Błędny login lub hasło!", ""));
         }
         inputLogin = null;
         inputPassword = null;

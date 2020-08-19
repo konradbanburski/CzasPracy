@@ -29,11 +29,11 @@ public class AdminJobFormController {
     public void addJob()
     {
         if (sql.insertJob(name) == true) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Klient został utworzony.", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Czynność została utworzona.", ""));
         }
         else
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas tworzenia klienta!", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Wystąpił błąd podczas tworzenia czynności!", ""));
         }
     }
 }
